@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA V | The Legend of Los Santos</title>
+    <link rel="stylesheet" href="gta5_style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="logo">GTAV</div>
+        <div class="nav-links">
+            <a href="#hero">Início</a>
+            <a href="#trio">Personagens</a>
+            <a href="#features">Recursos</a>
+            <a href="#gallery">Galeria</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="gta5video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>GRAND THEFT <span>AUTO V</span></h1>
+            <p>A experiência definitiva de mundo aberto em Los Santos. Mais de uma década de excelência, caos e entretenimento sem precedentes.</p>
+            <a href="#trio" class="btn btn-primary">Conheça o Trio</a>
+        </div>
+    </section>
+
+    <section id="trio" class="reveal section">
+        <h2 class="section-title">O Trio de Ferro</h2>
+        <div class="trio-container">
+            <div class="trio-img-wrapper">
+                <img src="gta5_characters.jpg" alt="GTA V Trio">
+            </div>
+            <div class="trio-info">
+                <div class="info-card">
+                    <h3>Michael</h3>
+                    <p>O mestre do crime aposentado. Um ex-ladrão de bancos no programa de proteção a testemunhas que busca emoção.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Franklin</h3>
+                    <p>O jovem ambicioso das ruas. Um especialista em direção buscando subir na vida a qualquer custo.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Trevor</h3>
+                    <p>O caos em pessoa. Um psicopata explosivo e imprevisível que vive nas margens de Blaine County.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal section" id="features">
+        <h2 class="section-title">A Imensidão de Los Santos</h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Mundo Aberto</h3>
+                <p>Explore Blaine County e Los Santos em detalhes nunca vistos.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-car"></i>
+                <h3>Veículos</h3>
+                <p>Centenas de opções de terra, mar e ar para customizar.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-users"></i>
+                <h3>GTA Online</h3>
+                <p>Uma experiência multiplayer em constante evolução.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Economia</h3>
+                <p>Invista em propriedades e ações para dominar o mercado.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal section" id="gallery">
+        <h2 class="section-title">Visuais de Los Santos</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="scenic_1.jpg" alt="Los Santos Coastline">
+            </div>
+            <div class="gallery-item">
+                <img src="scenic_2.jpg" alt="Desert Highway">
+            </div>
+            <div class="gallery-item">
+                <img src="scenic_3.jpg" alt="Visuals Grid">
+            </div>
+            <div class="gallery-item">
+                <img src="scenic_4.jpg" alt="Desert Road">
+            </div>
+            <div class="gallery-item">
+                <img src="scenic_5.jpg" alt="Vinewood Sign Night">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo" style="margin-bottom: 30px;">GTAV</div>
+        <div class="footer-nav">
+            <a href="#">Privacidade</a>
+            <a href="#">Termos</a>
+            <a href="#">Suporte</a>
+            <a href="#">Rockstar Games</a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Rockstar Games Enthusiast Project. Baseado na lendária obra da Rockstar North.
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="imgPreview">
+    </div>
+
+    <script>
+        // Scrolling Navbar effect
+        const navbar = document.getElementById('navbar');
+        window.onscroll = function() {
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Scroll Reveal implementation
+            let reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        };
+
+        // Modal Logic
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("imgPreview");
+        const galleryItems = document.querySelectorAll(".gallery-item img");
+        const closeBtn = document.querySelector(".close-modal");
+
+        galleryItems.forEach(img => {
+            img.onclick = function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            }
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Trigger initial reveal check
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>
